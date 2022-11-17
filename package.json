@@ -1,18 +1,43 @@
 {
+  "main": "dist/server/index.js",
+  "engines": {
+    "node": "10"
+  },
   "name": "nexttutorialjs",
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
+    "dev:server": "babel src/server --out-dir dist/server --source-maps --watch",
+    "dev:client": "next src/client",
+    "dev": "npm run dev:client & npm run dev:server",
+    "build:client": "next build src/client",
+    "build:server": "babel src/server --out-dir dist/server --source-maps",
+    "build": "npm run build:client && npm run build:server",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "preserve": "npm run build",
+    "serve": "cross-env NODE_ENV=production firebase serve --only functions,hosting",
+    "predeploy": "rimraf dist/ && npm run build",
+    "deploy": "cross-env NODE_ENV=production firebase deploy --only functions,hosting"
   },
   "dependencies": {
+    "dotenv": "^16.0.3",
     "eslint": "8.27.0",
     "eslint-config-next": "13.0.2",
+    "express": "^4.18.2",
+    "firebase-admin": "^11.2.1",
+    "firebase-functions": "^4.0.2",
     "next": "13.0.2",
+    "psn-api": "^2.8.1",
     "react": "18.2.0",
     "react-dom": "18.2.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.19.3",
+    "@babel/core": "^7.20.2",
+    "@babel/preset-env": "^7.20.2",
+    "@types/node": "^18.11.9",
+    "cross-env": "^7.0.3",
+    "rimraf": "^3.0.2"
   }
 }

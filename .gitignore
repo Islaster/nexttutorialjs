@@ -4,6 +4,7 @@
 /node_modules
 /.pnp
 .pnp.js
+.env
 
 # testing
 /coverage
@@ -14,7 +15,8 @@
 
 # production
 /build
-
+/dist
+/.firebase
 # misc
 .DS_Store
 *.pem
